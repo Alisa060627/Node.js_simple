@@ -1,0 +1,88 @@
+<!DOCTYPE>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete user</title>
+    <style>
+        nav{
+            overflow: hidden;
+            display: flex;
+            justify-content: flex-end;
+            background: #212020;
+            padding-top: 30px;
+            padding-bottom: 30px;
+            padding-right: 50px;
+            position: relative;
+            z-index: 2;
+        }
+        a{
+            color: #9f9f9f;
+            text-decoration: none;
+            font-size: 23px;
+            font-family: "Times New Roman";
+            margin-right:20px;
+        }
+        a:hover{
+            color: white;
+        }
+        .content {
+            font-size: 40px;
+            padding-left: 35%;
+            padding-top: 150px;
+        }
+
+        .sticky {
+            position: fixed;
+            top: 0;
+            width: 90%;
+
+
+        }
+
+        .sticky + .content {
+            padding-top: 60px;
+        }
+        .project-title {
+            color: #f8f6f2;
+            font-size: 25px;
+            font-family: "Times New Roman";
+            margin-left: 50px;
+        }
+        .links{
+            margin-left: auto;
+        }
+    </style>
+</head>
+
+<body style="background: #f8f6f2">
+<nav>
+    <div class="project-title">Node.js Project</div>
+    <div class="links">
+        <a href="/">Home</a>
+        <a href="/users">Users</a>
+        <a href="/users/new">Create new user</a>
+    </div>
+</nav>
+
+<div class="content">User <%=user.name%> <%=user.surname%> is deleted!</div>
+<script>
+    const navbar = document.querySelector('nav');
+
+    function stickynavbar() {
+        const rect = navbar.getBoundingClientRect();
+        let top = rect.top + window.scrollY;
+
+        if (window.scrollY >= top) {
+            navbar.classList.add('sticky');
+            document.body.style.marginTop = navbar.offsetHeight + 'px';
+        } else {
+            navbar.classList.remove('sticky');
+            document.body.style.marginTop = '0';
+        }
+    }
+
+    window.addEventListener('scroll', stickynavbar);
+</script>
+
+</body>
+</html>
