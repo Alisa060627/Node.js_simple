@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit user</title>
+    <style>
+        nav{
+            overflow: hidden;
+            display: flex;
+            justify-content: flex-end;
+            background: #212020;
+            padding-top: 30px;
+            padding-bottom: 30px;
+            padding-right: 50px;
+            position: relative;
+            z-index: 2;
+        }
+
+        a{
+            color:#9f9f9f;
+            text-decoration: none;
+            font-size: 23px;
+            font-family: "Times New Roman";
+            margin-right:20px;
+        }
+        a:hover{
+            color: white;
+        }
+        .content {
+            padding: 5px;
+        }
+
+        .sticky {
+            position: fixed;
+            top: 0;
+            width: 90%;
+
+
+        }
+
+        .sticky + .content {
+            padding-top: 60px;
+        }
+        input[type=text], input[type=number]{
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            resize: vertical;
+        }
+        #left{
+            float:right;
+       width: 80%;
+        }
+        #btn{
+            font-size: medium;
+            margin-left: 50%;
+            width: 150px;
+            background: #ad9375;
+            color: white;
+            border: 2px solid #ad9375;
+            border-radius: 15px;
+            height: 50px;
+            transition: ease-in-out 200ms;
+        }
+        #btn:hover{
+            background: white;
+            color: #ad9375;
+        }
+        input::file-selector-button {
+            background: #50463c;
+            color: white;
+            border-radius: 5px;
+        }
+        input::file-selector-button:hover {
+            background:#f8f6f2 ;
+            color:#50463c ;
+
+
+        }
+        .project-title {
+            color: #f8f6f2;
+            font-size: 25px;
+            font-family: "Times New Roman";
+            margin-left: 50px;
+        }
+        .links{
+            margin-left: auto;
+        }
+        img{
+            margin-left: 45px;
+            width: 180px;
+            height: 170px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body style="background: #f8f6f2">
+<nav>
+    <div class="project-title">Node.js Project</div>
+    <div class="links">
+        <a href="/">Home</a>
+        <a href="/users">Users</a>
+        <a href="/users/new">Create new user</a>
+    </div>
+</nav>
+
+
+<div class="content">
+<h2>Here you can edit a user!</h2>
+    <hr>
+    <br>
+<form action="/users/<%=user.id%>/edit" method="post" enctype="multipart/form-data">
+
+    <div id="left">
+        <label>Name</label>
+        <input type="text" name="name" id="name" value="<%=user.name%>">
+        <label>Surname</label>
+        <input type="text" name="surname" id="surname" value="<%=user.surname%>">
+        <label>Age</label>
+        <input type="number" name="age" id="age" value="<%=user.age%>" min="1" >
+        <label for="icon" >Photo</label>
+        <br>
+        <input type="file" class="custom-file-button" name="icon" id="icon" accept="image/*">
+    </div>
+    <div>
+        <img id="icon" src="<%= user.icon%>" width="200px" alt="User Picture">
+    </div>
+
+    <button id="btn" type="submit"  >Save</button>
+</form>
+</div>
+<script>
+    const navbar = document.querySelector('nav');
+
+    function stickynavbar() {
+        const rect = navbar.getBoundingClientRect();
+        let top = rect.top + window.scrollY;
+
+        if (window.scrollY >= top) {
+            navbar.classList.add('sticky');
+            document.body.style.marginTop = navbar.offsetHeight + 'px';
+        } else {
+            navbar.classList.remove('sticky');
+            document.body.style.marginTop = '0';
+        }
+    }
+
+    window.addEventListener('scroll', stickynavbar);
+</script>
+</body>
+</html>
